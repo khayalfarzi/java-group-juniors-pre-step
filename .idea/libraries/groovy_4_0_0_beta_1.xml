@@ -1,0 +1,68 @@
+<component name="libraryTable">
+  <library name="groovy-4.0.0-beta-1" type="groovy-library">
+    <properties version="4.0.0-beta-1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-datetime-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-astbuilder-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-cli-commons-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-cli-picocli-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-contracts-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-ant-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-dateutil-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-console-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-docgenerator-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-groovydoc-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-jmx-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-ginq-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-jsr223-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-json-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-macro-library-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-servlet-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-macro-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-sql-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-nio-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-groovysh-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-test-junit5-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-swing-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-testng-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-toml-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-typecheckers-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-templates-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-test-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-xml-4.0.0-beta-1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-4.0.0-beta-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-astbuilder-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-cli-commons-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-ant-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-cli-picocli-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-console-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-datetime-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-ginq-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-contracts-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-jmx-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-jsr223-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-json-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-docgenerator-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-groovysh-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-groovydoc-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-macro-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-macro-library-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-nio-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-dateutil-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-servlet-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-sql-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-test-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-test-junit5-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-templates-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-testng-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-toml-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-swing-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-typecheckers-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-4.0.0-beta-1-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/happy-family/lib/groovy-xml-4.0.0-beta-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
