@@ -79,6 +79,6 @@ public class Pet {
     @Override
     public String toString() {
         return String.format("%s{nickname='%s', age=%d, trickLevel=%s, habits=%s}",
-                species, nickname, age, trickLevel, Arrays.toString(habits));
+                 species, nickname, age, trickLevel, Arrays.toString(habits));
     }
 }
