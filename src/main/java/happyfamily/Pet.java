@@ -1,6 +1,7 @@
 package happyfamily;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Pet {
     private String species;
@@ -8,6 +9,12 @@ public class Pet {
     private int age=-1;
     private int trickLevel;
     private  String[] habits;
+    static{
+        System.out.println("Pet class is being loaded");
+    }
+    {
+        System.out.println("Pet object is created");
+    }
     public Pet(String species, String nickname){
         setSpecies(species);
         setNickname(nickname);
@@ -75,7 +82,7 @@ public class Pet {
      }
 
      public void respond(){
-        System.out.println("Hello, owner. I am - "+getNickname()+". I miss you!");
+        System.out.printf("Hello, owner. I am - %s. I miss you!",getNickname());
      }
 
     public void foul(){
@@ -84,8 +91,25 @@ public class Pet {
 
     @Override
     public String toString() {
-        return getSpecies()+"{nickname="+getNickname()+", age="+getAge()+"," +
-                " trickLevel="+getTrickLevel()+", habits="+((getHabits()==null)?(""):(Arrays.toString(getHabits())))+"}";
+        return String.format("%s{nickname=%s, age=%d, trickLevel=%d, habits=%s}",getSpecies(),getNickname(),getAge(),
+                getTrickLevel(),((getHabits()==null)?(""):(Arrays.toString(getHabits()))));
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(this==obj){
+            return true;
+        }
+        if(!(obj instanceof  Pet)){
+            return false;
+        }
+        Pet pet= (Pet) obj;
+        return pet.getSpecies().equals(getSpecies()) & pet.getNickname().equals(getNickname())
+                & pet.getTrickLevel()==getTrickLevel() & pet.getAge()==getAge();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getTrickLevel(),getNickname(),getAge(),getSpecies());
     }
 }
