@@ -1,5 +1,7 @@
 package az.happy.family.models;
 
+import java.util.Random;
+
 public class Human {
     private Human mother;
     private Human father;
@@ -124,6 +126,20 @@ public class Human {
         }
         return String.format("Human{name=%s, surname=%s, year=%d, iq=%d, mother=%s, father=%s, pet=%s}",
                 name, surname, year, iqLevel, mother.name, father.name, pet);
+    }
+
+    public boolean feedPet(boolean isFeedTime) {
+        if (isFeedTime) {
+            System.out.printf("Hm... I will feed Jack's %s", pet.getNickname());
+            return true;
+        } else {
+            Random random = new Random();
+            int levelComparison = random.nextInt(100);
+            if (pet.getTrickLevel() > levelComparison)
+                return feedPet(true);
+        }
+        System.out.println("I think Jack is not hungry.");
+        return false;
     }
 }
 
