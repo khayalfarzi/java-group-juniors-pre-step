@@ -14,7 +14,7 @@ public class AHappyFamilyApp {
         Family family1 = new Family(new Human("Mami"), new Human("Papi"),
                 new Human[]{new Human("Mahmud", "Mahmudlu", 2009,
                         (byte)1, new String[][]{{"a"}, {"a"}}, new Family()),
-                        new Human("Totu")}, new Pet("Doggy"));
+                           new Human("Totu")}, new Pet("Doggy"));
         System.out.println(family1);
     }
 }
