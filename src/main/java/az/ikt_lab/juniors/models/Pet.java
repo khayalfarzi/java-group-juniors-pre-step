@@ -1,6 +1,7 @@
-package AHappyFamilyOrigin;
+package az.ikt_lab.juniors.models;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Pet {
     private String species;
@@ -10,10 +11,12 @@ public class Pet {
     private String[] habits;
 
     public Pet() {
+        System.out.println(String.format("Object's type: %s", Pet.this));
     }
 
     public Pet(String nickname) {
         this.nickname = nickname;
+        System.out.println(String.format("Object's type: %s", Pet.this));
     }
 
     public Pet(String species, String nickname, Integer age, Integer trickLevel, String[] habits) {
@@ -22,6 +25,11 @@ public class Pet {
         this.age = age;
         this.trickLevel = trickLevel;
         this.habits = habits;
+        System.out.println(String.format("Object's type: %s", Pet.this));
+    }
+
+    static {
+        System.out.println(String.format("Name of %s :)", Pet.class));
     }
 
     public String getSpecies() {
@@ -77,8 +85,27 @@ public class Pet {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return Objects.equals(species, pet.species) &&
+                Objects.equals(nickname, pet.nickname) &&
+                Objects.equals(age, pet.age) &&
+                Objects.equals(trickLevel, pet.trickLevel) &&
+                Arrays.equals(habits, pet.habits);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(species, nickname, age, trickLevel);
+        result = 31 * result + Arrays.hashCode(habits);
+        return result;
+    }
+
+    @Override
     public String toString() {
         return String.format("%s{nickname='%s', age=%d, trickLevel=%s, habits=%s}",
-                 species, nickname, age, trickLevel, Arrays.toString(habits));
+                species, nickname, age, trickLevel, Arrays.toString(habits));
     }
 }
