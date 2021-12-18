@@ -1,7 +1,4 @@
-package com.happy.family;
-
-import java.time.LocalDateTime;
-import java.util.Arrays;
+package az.happy.family.models;
 
 public class Human {
     private Human mother;
@@ -10,20 +7,21 @@ public class Human {
 
     private String name;
     private String surname;
-    private LocalDateTime year;
-    private int iqLevel;
+    private int year;
+    //default IQ level is 85
+    private int iqLevel = 85;
     private String[][] schedule;
 
     public Human() {
     }
 
-    public Human(String name, String surname, LocalDateTime dateOfBirth) {
+    public Human(String name, String surname, int dateOfBirth) {
         this.name = name;
         this.surname = surname;
         this.year = dateOfBirth;
     }
 
-    public Human(String name, String surname, LocalDateTime dateOfBirth, Human father, Human mother) {
+    public Human(String name, String surname, int dateOfBirth, Human father, Human mother) {
         this.name = name;
         this.surname = surname;
         this.year = dateOfBirth;
@@ -33,7 +31,7 @@ public class Human {
 
     public Human(Human mother, Human father,
                  Pet pet, String name,
-                 String surname, LocalDateTime year,
+                 String surname, int year,
                  int iqLevel, String[][] schedule) {
         this.mother = mother;
         this.father = father;
@@ -43,23 +41,6 @@ public class Human {
         this.year = year;
         this.iqLevel = iqLevel;
         this.schedule = schedule;
-    }
-
-    public void greetPet() {
-        System.out.println("Hello, " + pet.getNickname());
-    }
-
-    public void describePet() {
-        String petLevel = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
-        String message = "I have a " + pet.getSpecies() + ", he is " + pet.getAge() + ", he is " + petLevel;
-        System.out.println(message + petLevel);
-    }
-
-    @Override
-    public String toString() {
-        return "Human{" + "mother=" + mother + ", father=" + father +
-                pet + ", name='" + name + '\'' + ", surname='" + surname + '\'' + ", year=" + year +
-                ", iqLevel=" + iqLevel + ", schedule=" + Arrays.toString(schedule) + '}';
     }
 
     public Human getMother() {
@@ -102,11 +83,11 @@ public class Human {
         this.surname = surname;
     }
 
-    public LocalDateTime getYear() {
+    public int getYear() {
         return year;
     }
 
-    public void setYear(LocalDateTime year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
@@ -124,6 +105,25 @@ public class Human {
 
     public void setSchedule(String[][] schedule) {
         this.schedule = schedule;
+    }
+
+    public void greetPet() {
+        System.out.printf("Hello, %s %n", pet.getNickname());
+    }
+
+    public void describePet() {
+        String petLevel = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
+        System.out.printf("I have a %s, he is %d, he is %s%n", pet.getSpecies(), pet.getAge(), petLevel);
+    }
+
+    @Override
+    public String toString() {
+        if (mother == null || father == null || pet == null) {
+            return String.format("Human{name=%s, surname=%s, year=%d, iq=%d}",
+                    name, surname, year, iqLevel);
+        }
+        return String.format("Human{name=%s, surname=%s, year=%d, iq=%d, mother=%s, father=%s, pet=%s}",
+                name, surname, year, iqLevel, mother.name, father.name, pet);
     }
 }
 
