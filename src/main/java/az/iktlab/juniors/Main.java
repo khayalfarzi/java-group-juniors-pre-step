@@ -25,5 +25,6 @@ public class Main {
         happyFamily.deleteByObject(child);
         System.out.println(happyFamily);
         System.out.println();
+        System.out.println();
     }
 }
