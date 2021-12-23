@@ -1,5 +1,6 @@
 package az.iktlab.juniors.models;
 
+import az.iktlab.juniors.util.Validator;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -11,35 +12,30 @@ public class Human {
     private Short year;
     private Byte iq;
     private String[][] schedule;
+    private Validator validator;
+
+    static {
+        System.out.printf("Class name: %s%n",Human.class );
+    }
+    {
+        System.out.printf("Object type: %s%n",Human.this);
+    }
 
     public Human() {
-        {
-            System.out.printf("Object type: %s%n",Human.this);
-        }
     }
 
     public Human(String name, String surname, Short year) {
         this.name = name;
         this.surname = surname;
         this.year = year;
-        {
-            System.out.printf("Object type: %s%n",Human.this);
-        }
     }
 
     public Human(String name, String surname, Short year, Byte iq,String[][] schedule){
         this.name = name;
         this.surname = surname;
         this.year = year;
-        this.iq = isTrueForIq(iq);
+        this.iq = validator.isTrueForIq(iq) ? iq : 0;
         this.schedule = schedule;
-        {
-            System.out.printf("Object type: %s%n",Human.this);
-        }
-    }
-
-    static {
-        System.out.printf("Class name: %s%n",Human.class );
     }
 
     public String getName() {
@@ -71,7 +67,7 @@ public class Human {
     }
 
     public void setIq(Byte iq) {
-        this.iq = isTrueForIq(iq);
+        this.iq = validator.isTrueForIq(iq) ? iq : 0;
     }
 
     public String[][] getSchedule() {
@@ -82,25 +78,30 @@ public class Human {
         this.schedule = schedule;
     }
 
-    public Byte isTrueForIq(Byte iq) {
-        return iq <= 100 && iq >= 1 ? iq : 0;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) &&
+                Objects.equals(year, human.year) && Objects.equals(iq, human.iq) &&
+                Arrays.deepEquals(schedule, human.schedule);
     }
 
-    public Object isNull(Object object){
-        return object != null ? object : "(No information)";
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(name, surname, year, iq);
+        result = 31 * result + Arrays.deepHashCode(schedule);
+        return result;
     }
 
     @Override
     public String toString() {
         return String.format("Human{name='%s', surname='%s', year=%s, iq=%s, schedule = %s}",
-                isNull(getName()), isNull(getSurname()), isNull(getYear()),
-                getIq(), isNull(Arrays.deepToString(getSchedule())));
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        Human human = (Human) obj;
-        return human.getName().equals(getName()) && human.getSurname().equals(getSurname())
-                && Objects.equals(human.getYear(), getYear());
+                validator.isNull(getName()) ? getName() : "(No information)",
+                validator.isNull(getSurname()) ? getSurname() : "(No information)",
+                validator.isNull(getYear()) ? getYear() : "(No information)",
+                getIq(),
+                validator.isNull(Arrays.deepToString(getSchedule())) ? Arrays.deepToString(getSchedule()) : "(No information)");
     }
 }

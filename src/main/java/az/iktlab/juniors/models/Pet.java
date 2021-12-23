@@ -1,6 +1,7 @@
 package az.iktlab.juniors.models;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class Pet {
 
@@ -10,10 +11,15 @@ public class Pet {
     private Byte trickLevel;
     private String[] habits;
 
+    static {
+        System.out.printf("Class name: %s%n",Pet.class );
+    }
+    {
+        System.out.printf("Object type: %s%n",Pet.this);
+    }
+
     public Pet(){
-        {
-            System.out.printf("Object type: %s%n",Pet.this);
-        }
+
     }
     //All fields constructor
     public Pet(String species, String nickname, Short age, Byte trickLevel, String[] habits)
@@ -23,13 +29,6 @@ public class Pet {
         this.age = age;
         this.trickLevel = trickLevel;
         this.habits = habits;
-        {
-            System.out.printf("Object type: %s%n",Pet.this);
-        }
-    }
-
-    static {
-        System.out.printf("Class name: %s%n",Pet.class );
     }
 
     public String getSpecies() {
@@ -93,6 +92,21 @@ public class Pet {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return Objects.equals(species, pet.species) && Objects.equals(nickname, pet.nickname) && Objects.equals(age, pet.age) && Objects.equals(trickLevel, pet.trickLevel) && Arrays.equals(habits, pet.habits);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = Objects.hash(species, nickname, age, trickLevel);
+        result = 31 * result + Arrays.hashCode(habits);
+        return result;
+    }
+
+    @Override
     public String toString()
     {
         return String.format("%s{nickname='%s', age=%s, trickLevel=%s, habits=%s}",
@@ -100,12 +114,4 @@ public class Pet {
                 isNull(getTrickLevel()),isNull(Arrays.toString(getHabits())));
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        Pet pet = (Pet)obj;
-
-        if(pet == null) return false;
-        return pet.getSpecies().equals(getSpecies()) && pet.getNickname().equals(getNickname())
-                && pet.getAge().equals(getAge());
-    }
 }

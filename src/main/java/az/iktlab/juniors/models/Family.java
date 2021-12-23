@@ -10,18 +10,21 @@ public class Family {
     private Human[] children;
     private Pet pet;
 
+    static {
+        System.out.printf("Class name: %s%n",Family.class);
+    }
+
+    {
+        System.out.printf("Object type: %s%n",Family.this);
+    }
+
     public Family(){
-        {
-            System.out.printf("Object type: %s%n",Family.this);
-        }
+
     }
 
     public Family(Human mother, Human father) {
         this.mother = mother;
         this.father = father;
-        {
-            System.out.printf("Object type: %s%n",Family.this);
-        }
     }
 
     public Family(Human mother, Human father, Human[] children, Pet pet) {
@@ -29,13 +32,6 @@ public class Family {
         this.father = father;
         this.children = children;
         this.pet = pet;
-        {
-            System.out.printf("Object type: %s%n",Family.this);
-        }
-    }
-
-    static {
-        System.out.printf("Class name: %s%n",Family.class );
     }
 
     public Human getMother() {
@@ -144,17 +140,11 @@ public class Family {
     }
 
     @Override
-    public String toString() {
-        return String.format("Family{ mother=%s%n, father=%s%n, pet = %s%n, children=%s}%n",
-                isNull(getMother()), isNull(getFather()) ,
-                isNull(getPet()),
-                isNull(Arrays.toString(getChildren())) );
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        Family family = (Family) obj;
-        return family.getMother().equals(getMother()) && family.getFather().equals(getFather());
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Family family = (Family) o;
+        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Arrays.equals(children, family.children) && Objects.equals(pet, family.pet);
     }
 
     @Override
@@ -162,5 +152,13 @@ public class Family {
         int result = Objects.hash(mother, father, pet);
         result = 31 * result + Arrays.hashCode(children);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Family{ mother=%s%n, father=%s%n, pet = %s%n, children=%s}%n",
+                isNull(getMother()), isNull(getFather()) ,
+                isNull(getPet()),
+                isNull(Arrays.toString(getChildren())) );
     }
 }
