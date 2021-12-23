@@ -1,3 +1,5 @@
+package az.iktlab.project;
+
 import java.util.Arrays;
 public class Pet {
     private String species;
@@ -5,25 +7,14 @@ public class Pet {
     private int age;
     private int trickLevel;
     private String[] habits;
-    public String eat(){
-        return ("I am eating");
+    public void eat(){
+        System.out.println ("I am eating");
     }
-    public String respond(){
-        return("Hello, owner. I am-" +getNickname()+". I miss you!");
+    public void respond(){
+        System.out.printf("Hello, owner. I am-%s. I miss you!%n",getNickname());
     }
-    public String foul(){
-        return ("I need to cover it up");
-    }
-
-    @Override
-    public String toString() {
-        return "Pet{" +
-                "species='" + species + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", age=" + age +
-                ", trickLevel=" + trickLevel +
-                ", habits=" + Arrays.toString(habits) +
-                '}';
+    public void foul(){
+        System.out.println ("I need to cover it up");
     }
 
     public Pet() {
@@ -55,26 +46,41 @@ public class Pet {
         this.species = species;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public int getAge() {
         return age;
     }
 
-    public String getNickname() {
-
-        return nickname;
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public int getTrickLevel() {
         return trickLevel;
     }
 
+    public void setTrickLevel(int trickLevel) {
+        this.trickLevel = trickLevel;
+    }
+
+    public String[] getHabits() {
+        return habits;
+    }
+
+    public void setHabits(String[] habits) {
+        this.habits = habits;
+    }
+    @Override
+    public String toString() {
+        return String.format("%s{nickname='%s', age=%d, trickLevel=%d, habits=[%s]}",
+                this.species,this.nickname,this.age,this.trickLevel, Arrays.toString(this.habits));
+    }
 
 }
