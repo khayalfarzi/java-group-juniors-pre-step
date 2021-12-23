@@ -33,8 +33,11 @@ public class HappyFamily {
         family.addChild(child2);
         family.setPet(dog);
 
-        family.deleteChild(0);
+        System.out.println("**************Before delete child************");
+        System.out.println(family.toString());
 
+        family.deleteChild(0);
+        System.out.println("**************After delete child************");
         System.out.println(family.toString());
 
         System.out.println(family.countOfFamily());

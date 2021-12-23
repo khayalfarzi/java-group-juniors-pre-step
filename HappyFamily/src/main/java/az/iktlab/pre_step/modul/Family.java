@@ -52,16 +52,6 @@ public class Family {
     }
 
 
-    @Override
-    public String toString() {
-        return String.format("Family{ mother=%s%n, father=%s%n, pet = %s%n, children=%s}%n",
-                isNull(getMother()),
-                isNull(getFather()) ,
-                isNull(getPet()),
-                isNull(Arrays.toString(getChildren())) );
-    }
-
-
     public Object isNull(Object object){
         return object != null ? object : "empty";
     }
@@ -122,6 +112,15 @@ public class Family {
 
     public int countOfFamily(){
         return getChildren().length + (getFather() != null? 1 : 0) + (getMother() != null? 1 : 0);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Family{ mother=%s%n, father=%s%n, pet = %s%n, children=%s}%n",
+                isNull(getMother()),
+                isNull(getFather()) ,
+                isNull(getPet()),
+                isNull(Arrays.toString(getChildren())) );
     }
 
     @Override
