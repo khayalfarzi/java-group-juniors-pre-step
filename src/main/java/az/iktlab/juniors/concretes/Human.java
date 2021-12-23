@@ -2,7 +2,6 @@ package az.iktlab.juniors.concretes;
 
 import az.iktlab.juniors.abstracts.Entity;
 import az.iktlab.juniors.utils.ExceptionUtil;
-import az.iktlab.juniors.utils.UtilClass;
 
 import java.util.Arrays;
 
@@ -12,10 +11,16 @@ public class Human implements Entity {
     private String surname;
     private Integer year;
     private Byte iq;
-    private Pet pet;
-    private Human mother;
-    private Human father;
     private String[][] schedule;
+    private boolean isMarried;
+
+    static {
+        System.out.printf("Class is being loaded %s\n", Human.class);
+    }
+
+    {
+        System.out.printf("Class is being loaded %s\n", this.getClass().getName());
+    }
 
     public Human() {
     }
@@ -29,19 +34,12 @@ public class Human implements Entity {
         this.year = year;
     }
 
-    public Human(String name, String surname, Integer year, Human mother, Human father) throws ExceptionUtil {
+    public Human(String name, String surname, Integer year, Byte iq, String[][] schedule) throws ExceptionUtil {
         this(name, surname, year);
-        this.mother = mother;
-        this.father = father;
-    }
-
-    public Human(String name, String surname, Integer year, Byte iq, Pet pet, Human mother, Human father, String[][] schedule) throws ExceptionUtil {
-        this(name, surname, year, father, mother);
         if (iq < 1 || iq > 100) {
             throw new ExceptionUtil("IQ must be between 1 to 100");
         }
         this.iq = iq;
-        this.pet = pet;
         this.schedule = schedule;
     }
 
@@ -83,30 +81,6 @@ public class Human implements Entity {
         this.iq = iq;
     }
 
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
-    public Human getMother() {
-        return mother;
-    }
-
-    public void setMother(Human mother) {
-        this.mother = mother;
-    }
-
-    public Human getFather() {
-        return father;
-    }
-
-    public void setFather(Human father) {
-        this.father = father;
-    }
-
     public String[][] getSchedule() {
         return schedule;
     }
@@ -115,17 +89,12 @@ public class Human implements Entity {
         this.schedule = schedule;
     }
 
-    public void greetPet() {
-        System.out.printf("Hello, %s", pet.getNickname());
+    public boolean isMarried() {
+        return isMarried;
     }
 
-    public void describePet() {
-        String result = pet.getTrickLevel() > 50 ? "very sly" : "almost not sly";
-        System.out.printf("I have a %s, he is %d years old, he is %s", pet.getSpecies(), pet.getAge(), result);
-    }
-
-    public boolean feedPet(boolean isFeedingTime, Byte trickLevel) {
-        return UtilClass.feedPet(isFeedingTime, trickLevel, pet.getNickname());
+    public void setMarried(boolean married) {
+        isMarried = married;
     }
 
     @Override
@@ -135,13 +104,11 @@ public class Human implements Entity {
 
         Human human = (Human) o;
 
+        if (isMarried != human.isMarried) return false;
         if (name != null ? !name.equals(human.name) : human.name != null) return false;
         if (surname != null ? !surname.equals(human.surname) : human.surname != null) return false;
         if (year != null ? !year.equals(human.year) : human.year != null) return false;
         if (iq != null ? !iq.equals(human.iq) : human.iq != null) return false;
-        if (pet != null ? !pet.equals(human.pet) : human.pet != null) return false;
-        if (mother != null ? !mother.equals(human.mother) : human.mother != null) return false;
-        if (father != null ? !father.equals(human.father) : human.father != null) return false;
         return Arrays.deepEquals(schedule, human.schedule);
     }
 
@@ -151,16 +118,14 @@ public class Human implements Entity {
         result = 31 * result + (surname != null ? surname.hashCode() : 0);
         result = 31 * result + (year != null ? year.hashCode() : 0);
         result = 31 * result + (iq != null ? iq.hashCode() : 0);
-        result = 31 * result + (pet != null ? pet.hashCode() : 0);
-        result = 31 * result + (mother != null ? mother.hashCode() : 0);
-        result = 31 * result + (father != null ? father.hashCode() : 0);
         result = 31 * result + Arrays.deepHashCode(schedule);
+        result = 31 * result + (isMarried ? 1 : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return String.format("Human{name='%s', surname='%s', year=%d, iq=%s, pet=%s, mother=%s, father=%s, schedule=%s}",
-                name, surname, year, iq, pet, mother, father, Arrays.toString(schedule));
+        return String.format("Human{name='%s', surname='%s', year=%d, iq=%s, schedule=%s, isMarried=%s}",
+                name, surname, year, iq, Arrays.toString(schedule), isMarried);
     }
 }

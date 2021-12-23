@@ -13,6 +13,14 @@ public class Pet implements Entity {
     private Byte trickLevel;
     private String[] habits;
 
+    static {
+        System.out.printf("Class is being loaded %s\n", Pet.class);
+    }
+
+    {
+        System.out.printf("Class is being loaded %s\n", this.getClass().getName());
+    }
+
     public Pet() {
     }
 
