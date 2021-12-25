@@ -1,4 +1,4 @@
-package az.iktlab.juniors.models;
+package az.iktlab.juniors.model;
 
 import az.iktlab.juniors.util.Validator;
 
@@ -12,15 +12,15 @@ public class Human {
     private Short year;
     private Byte iq;
     private String[][] schedule;
-    private Validator validator;
 
-    static {
+    /**
+     * static {
         System.out.printf("Class name: %s%n",Human.class );
     }
     {
         System.out.printf("Object type: %s%n",Human.this);
     }
-
+    */
     public Human() {
     }
 
@@ -34,7 +34,7 @@ public class Human {
         this.name = name;
         this.surname = surname;
         this.year = year;
-        this.iq = validator.isTrueForIq(iq) ? iq : 0;
+        this.iq = Validator.isTrueForIq(iq) ? iq : 0;
         this.schedule = schedule;
     }
 
@@ -67,7 +67,7 @@ public class Human {
     }
 
     public void setIq(Byte iq) {
-        this.iq = validator.isTrueForIq(iq) ? iq : 0;
+        this.iq = Validator.isTrueForIq(iq) ? iq : 0;
     }
 
     public String[][] getSchedule() {
@@ -76,6 +76,11 @@ public class Human {
 
     public void setSchedule(String[][] schedule) {
         this.schedule = schedule;
+    }
+
+    @Override
+    protected void finalize() {
+        System.out.println("Closed Human in the finalizer");
     }
 
     @Override
@@ -98,10 +103,11 @@ public class Human {
     @Override
     public String toString() {
         return String.format("Human{name='%s', surname='%s', year=%s, iq=%s, schedule = %s}",
-                validator.isNull(getName()) ? getName() : "(No information)",
-                validator.isNull(getSurname()) ? getSurname() : "(No information)",
-                validator.isNull(getYear()) ? getYear() : "(No information)",
+                Validator.isNull(getName()) ? getName() : "(No information)",
+                Validator.isNull(getSurname()) ? getSurname() : "(No information)",
+                Validator.isNull(getYear()) ? getYear() : "(No information)",
                 getIq(),
-                validator.isNull(Arrays.deepToString(getSchedule())) ? Arrays.deepToString(getSchedule()) : "(No information)");
+                Validator.isNull(Arrays.deepToString(getSchedule())) ?
+                        Arrays.deepToString(getSchedule()) : "(No information)");
     }
 }
