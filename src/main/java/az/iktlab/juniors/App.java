@@ -1,8 +1,9 @@
 package az.iktlab.juniors;
 
-
 import az.iktlab.juniors.model.*;
+import az.iktlab.juniors.util.Validator;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 public class App
@@ -11,8 +12,9 @@ public class App
     {
         Random rand = new Random();
 
-        Pet dog = new Pet(Species.DOG,"Paul",(short)2, (byte)30,new String[]{"eat, drink, sleep"});
-        Pet cat = new Pet();
+        Pet dog = new Dog();
+        dog.setSpecies(Species.DOG);
+        Pet cat = new DomesticCat();
         cat.setSpecies(Species.CAT);
         cat.setNickname("Milo");
         cat.setAge((short)2);
@@ -22,19 +24,21 @@ public class App
         Human grandMother = new Human();
         grandMother.setName("Emma");
         grandMother.setSurname("Emerson");
-        grandMother.setYear((short)1930);
+        grandMother.setDate(LocalDate.parse("1945-12-20"));
         grandMother.setIq((byte)100);
 
-        Human mother = new Human("Teresa","Butler",(short)1978);
-        Human father = new Human("Peter","Butler",(short) 1974);
+        Human mother = new Human("Teresa","Butler",LocalDate.parse("1978-02-15"));
+        mother.setIq((byte)60);
+        Human father = new Human("Peter","Butler",LocalDate.parse("1972-06-07"));
+        father.setIq((byte)95);
 
-        Human boy = new Human("Carlos","Butler",(short)1999,(byte)80, new String[][]{
+        Human boy = new Human("Carlos","Butler",LocalDate.parse("1999-11-30"),(byte)80, new String[][]{
                         {DayOfWeek.SATURDAY.getName(),"eat"},
                         {DayOfWeek.SUNDAY.getName(),"drink"},
                         {DayOfWeek.MONDAY.getName(),"sleep"}
         });
 
-        Human girl = new Human("Amelia","Butler",(short)2000,(byte)60,new String[][]{{DayOfWeek.MONDAY.getName(),"Sleep"}});
+        Human girl = new Human("Amelia","Butler",LocalDate.parse("2000-01-01"),(byte)60,new String[][]{{DayOfWeek.MONDAY.getName(),"Sleep"}});
 
         Family family = new Family();
         family.setMother(mother);
@@ -45,15 +49,15 @@ public class App
         System.out.println(dog);
         dog.eat();
         dog.respond();
-        dog.foul();
+        ((Dog)dog).foul();
         System.out.println(cat);
         System.out.println("-------------------------------------------------------------");
         System.out.println(boy);
         System.out.println("-------------------------------------------------------------");
         System.out.println(family);
-        family.greetPet();
         family.describePet();
-        boolean feedIsTime = family.isFeedTime(family.getPet().getTrickLevel() > rand.nextInt());
+        boolean feedIsTime = family.isFeedTime((Validator.isNull(family.getPet().getTrickLevel()) ?
+                family.getPet().getTrickLevel() : 0) > rand.nextInt());
 
         System.out.println(family.addChild(girl));
         System.out.println("After add :%n" + family);
@@ -63,15 +67,9 @@ public class App
         System.out.println("*******************************************");
         family.deleteChild(girl);
         System.out.println(family);
-
-        /**
-        for (int i = 0; i < 100000000; i++) {
-            new Human();
-        }
-         */
-
-        new Pet();
-        System.gc();
+        System.out.println("---------------------------------------------------");
+        family.bornChild();
+        System.out.println(family);
 
     }
 }

@@ -5,7 +5,7 @@ import az.iktlab.juniors.util.Validator;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Pet {
+public abstract class Pet {
 
     private Species species;
     private String nickname;
@@ -13,25 +13,8 @@ public class Pet {
     private Byte trickLevel;
     private String[] habits;
 
-    /**
-     * static {
-        System.out.printf("Class name: %s%n",Pet.class );
-     }
-     {
-        System.out.printf("Object type: %s%n",Pet.this);
-     }
-     */
-
-    public Pet(){ }
-
-    //All fields constructor
-    public Pet(Species species, String nickname, Short age, Byte trickLevel, String[] habits)
     {
-        this.species = species;
-        this.nickname = nickname;
-        this.age = age;
-        this.trickLevel = Validator.isTrueForTrickLevel(trickLevel) ? trickLevel : null;
-        this.habits = habits;
+        species = Species.UNKNOWN;
     }
 
     public Species getSpecies() {
@@ -63,7 +46,7 @@ public class Pet {
     }
 
     public void setTrickLevel(Byte trickLevel) {
-        this.trickLevel = Validator.isTrueForTrickLevel(trickLevel) ? trickLevel : null;
+        this.trickLevel = Validator.isTrueForIqOrForTrickLevel(trickLevel) ? trickLevel : null;
     }
 
     public String[] getHabits() {
@@ -74,17 +57,10 @@ public class Pet {
         this.habits = habits;
     }
 
+    public abstract void respond();
+
     public void eat() {
         System.out.println("I am eating.");
-    }
-
-    public void respond() {
-        System.out.printf("Hello, owner. I am - %s. I miss you!%n",
-                Validator.isNull(getNickname()) ? getNickname() : "No Information!");
-    }
-
-    public void foul(){
-        System.out.println("I need to cover it up");
     }
 
     @Override
@@ -114,7 +90,7 @@ public class Pet {
     {
         return String.format("%s{nickname='%s', age=%s, trickLevel=%s,"
                         .concat("canFly=%s, numberOfLegs=%s ,hasFur=%s, habits=%s}"),
-                Validator.isNull(getSpecies()) ? getSpecies() : "No Information!",
+                Validator.isNull(getSpecies()) ? getSpecies() : "No Information",
                 Validator.isNull(getNickname()) ? getNickname() : "No Information!",
                 Validator.isNull(getAge()) ? getAge() : "No Information!",
                 Validator.isNull(getTrickLevel()) ? getTrickLevel() : "No Information!",
