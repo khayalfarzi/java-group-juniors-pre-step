@@ -12,6 +12,14 @@ public class Family {
     private Pet pet;
     private int countFamily;
 
+    static {
+        System.out.printf("The class named=%s is loaded\n", Family.class.getSimpleName());
+    }
+
+    {
+        System.out.printf("The object of class named=%s is loaded\n", Family.class.getSimpleName());
+    }
+
     public Family(Human mother, Human father, Human[] children) {
         this.mother = mother;
         this.father = father;

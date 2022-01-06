@@ -10,6 +10,14 @@ public class Pet {
     private int trickLevel;
     private String[] habits;
 
+    static {
+        System.out.printf("The class named=%s is loaded\n", Pet.class.getSimpleName());
+    }
+
+    {
+        System.out.printf("The object of class named=%s is loaded\n", Pet.class.getSimpleName());
+    }
+
     public Pet() {
     }
 

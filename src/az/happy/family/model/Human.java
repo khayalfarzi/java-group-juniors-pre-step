@@ -13,6 +13,14 @@ public class Human {
     private int iqLevel = 85;
     private String[][] schedule;
 
+    static {
+        System.out.printf("The class named=%s is loaded\n", Human.class.getSimpleName());
+    }
+
+    {
+        System.out.printf("The object of class named=%s is loaded\n", Human.class.getSimpleName());
+    }
+
     public Human() {
     }
 
