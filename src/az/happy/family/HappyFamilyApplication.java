@@ -4,7 +4,7 @@ import az.happy.family.model.Family;
 import az.happy.family.model.Human;
 import az.happy.family.model.Pet;
 
-public class Main {
+public class HappyFamilyApplication {
     public static void main(String[] args) {
         Human mother = new Human("Karen", "Zuckerberg", 1955);
         Human father = new Human("Edward", "Zuckerberg", 1958);
