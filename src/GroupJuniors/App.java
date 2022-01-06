@@ -1,49 +1,35 @@
-package GroupJuniors;
+package az.baku.GroupJuniors;
 
-import Models.Family;
-import Models.Human;
-import Models.Pet;
-
-import java.util.Arrays;
+import az.baku.Models.Family;
+import az.baku.Models.Human;
+import az.baku.Models.Pet;
+import az.baku.Models.Species;
 
 public class App {
     public static void main(String[] args) {
-        Human mother = new Human();
-        mother.setName("Nargiz");
-        mother.setSurname("Dilanchiyea");
-        mother.setDateOfBirth((short) 1972);
-        Human father = new Human();
-        father.setName("Qoca");
-        father.setSurname("Dilanchiyev");
-        father.setDateOfBirth((short) 1968);
-        Human child1 = new Human();
-        child1.setName("Sabir");
-        child1.setSurname("Sabirli");
-        child1.setDateOfBirth((short) 1998);
-        Human child2 = new Human();
-        child2.setName("Narmin");
-        child2.setSurname("Sabirli");
-        child2.setDateOfBirth((short) 1999);
-        Family family1 = new Family();
-        family1.setMother(mother);
-        family1.setFather(father);
-        family1.setChildren(new Human[]{child1});
-        family1.addChild(family1.getChildren(), child2);
+        Human mother = new Human("Nargiz", "Dilanchiyea", (short) 1972, (byte) 66, new String[][]{});
+        Human father = new Human("Qoca", "Dilanchiyev", (short) 1968, (byte) 70, new String[][]{});
+        Human child1 = new Human("Sabir", "Sabirli", (short) 1998, (byte) 88, new String[][]{});
+        Human child2 = new Human("Mark", "Sabirli", (short) 2000, (byte) 88, new String[][]{});
+        Human child3 = new Human("Aishe", "Sabirli", (short) 2008, (byte) 88, new String[][]{});
+        Human child4 = new Human("Ella", "Sabirli", (short) 2008, (byte) 88, new String[][]{});
+        Human[] children = new Human[]{child1, child2, child3};
+
+        Pet tom = new Pet(Species.CAT, "Tom", (byte) 12, (byte) 45, new String[]{});
+
+        Family family1 = new Family(mother, father, children, tom);
         System.out.println(family1);
-        System.out.println("^^^Before deleting");
-        family1.deleteChild(child1);
+        family1.deleteChild(0);
         System.out.println(family1);
 
-        Family family2 = new Family();
-        Human mother1 = new Human();
-        mother1.setName("Narmin");
-        family2.setMother(mother1);
-        family2.setFather(father);
-        family2.setChildren(new Human[]{child1});
-        family2.deleteChild(child1);
-        System.out.println("Is equal?" + family1.equals(family2));
 
-        if (family1.equals(family2))
+//        for (int i = 0; i < 10; i++) {
+//                    Human child1 = new Human("Sabir", "Sabirli", (short) 1998, (byte) 88, new String[][]{});
+//        }
+//        for (int i = 0; i < 10; i++) {
+//            Pet pet = new Pet(Species.CAT, "Tom", (byte) 12, (byte) 45, new String[]{});
+//            Family family = new Family(mother, father, new Human[]{child1}, tom);
+//        }
         Family.countOfFamily();
 
 
