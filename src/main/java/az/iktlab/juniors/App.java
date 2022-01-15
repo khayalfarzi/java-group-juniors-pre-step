@@ -4,13 +4,14 @@ import az.iktlab.juniors.model.*;
 import az.iktlab.juniors.util.Validator;
 
 import java.time.LocalDate;
-import java.util.Random;
+import java.util.*;
 
-public class App
-{
-    public static void main( String[] args )
-    {
+public class App {
+    public static void main( String[] args ) {
+
         Random rand = new Random();
+
+        Set<String> habits = new HashSet<>(Arrays.asList("eat", "drink", "sleep"));
 
         Pet dog = new Dog();
         dog.setSpecies(Species.DOG);
@@ -19,7 +20,7 @@ public class App
         cat.setNickname("Milo");
         cat.setAge((short)2);
         cat.setTrickLevel((byte)60);
-        cat.setHabits(new String[]{"eat, drink, sleep"});
+        cat.setHabits(habits);
 
         Human grandMother = new Human();
         grandMother.setName("Emma");
@@ -32,19 +33,29 @@ public class App
         Human father = new Human("Peter","Butler",LocalDate.parse("1972-06-07"));
         father.setIq((byte)95);
 
-        Human boy = new Human("Carlos","Butler",LocalDate.parse("1999-11-30"),(byte)80, new String[][]{
-                        {DayOfWeek.SATURDAY.getName(),"eat"},
-                        {DayOfWeek.SUNDAY.getName(),"drink"},
-                        {DayOfWeek.MONDAY.getName(),"sleep"}
-        });
+        Map<DayOfWeek,String> schedule = new HashMap<>();
+        schedule.put(DayOfWeek.SATURDAY,"Eat");
+        schedule.put(DayOfWeek.SUNDAY,"Drink");
+        schedule.put(DayOfWeek.MONDAY,"sleep");
 
-        Human girl = new Human("Amelia","Butler",LocalDate.parse("2000-01-01"),(byte)60,new String[][]{{DayOfWeek.MONDAY.getName(),"Sleep"}});
+        Human boy = new Human("Carlos","Butler",LocalDate.parse("1999-11-30"),(byte)80,
+                schedule);
 
+        Map<DayOfWeek,String> scheduleTwo = new HashMap<>();
+        schedule.put(DayOfWeek.MONDAY,"Sleep");
+
+        Human girl = new Human("Amelia","Butler",LocalDate.parse("2000-01-01"),(byte)60,
+                scheduleTwo);
+        List<Human> children = new ArrayList<>();
+        children.add(boy);
+
+        Set<Pet> pets = new HashSet<>();
+        pets.add(dog);
         Family family = new Family();
         family.setMother(mother);
         family.setFather(father);
-        family.setChildren(new Human[]{boy});
-        family.setPet(dog);
+        family.setChildren(children);
+        family.setPets(pets);
 
         System.out.println(dog);
         dog.eat();
@@ -56,8 +67,13 @@ public class App
         System.out.println("-------------------------------------------------------------");
         System.out.println(family);
         family.describePet();
-        boolean feedIsTime = family.isFeedTime((Validator.isNull(family.getPet().getTrickLevel()) ?
-                family.getPet().getTrickLevel() : 0) > rand.nextInt());
+
+        family.getPets().forEach(pet -> {
+            boolean feedIsTime = family.isFeedTime((Validator.isNull(pet.getTrickLevel()) ?
+                    pet.getTrickLevel() : 0) > rand.nextInt());
+        });
+
+        ;
 
         System.out.println(family.addChild(girl));
         System.out.println("After add :%n" + family);

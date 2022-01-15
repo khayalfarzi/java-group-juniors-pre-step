@@ -1,4 +1,4 @@
 package az.iktlab.juniors;
 
-public class App {
+public class AppTest {
 }

@@ -2,8 +2,8 @@ package az.iktlab.juniors.model;
 
 import az.iktlab.juniors.util.Validator;
 
-import java.util.Arrays;
 import java.util.Objects;
+import java.util.Set;
 
 public abstract class Pet {
 
@@ -11,7 +11,7 @@ public abstract class Pet {
     private String nickname;
     private Short age;
     private Byte trickLevel;
-    private String[] habits;
+    private Set<String> habits;
 
     {
         species = Species.UNKNOWN;
@@ -49,11 +49,11 @@ public abstract class Pet {
         this.trickLevel = Validator.isTrueForIqOrForTrickLevel(trickLevel) ? trickLevel : null;
     }
 
-    public String[] getHabits() {
+    public Set<String> getHabits() {
         return habits;
     }
 
-    public void setHabits(String[] habits) {
+    public void setHabits(Set<String> habits) {
         this.habits = habits;
     }
 
@@ -73,16 +73,12 @@ public abstract class Pet {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Pet pet = (Pet) o;
-        return Objects.equals(species, pet.species) && Objects.equals(nickname, pet.nickname) &&
-                Objects.equals(age, pet.age) && Objects.equals(trickLevel, pet.trickLevel) &&
-                Arrays.equals(habits, pet.habits);
+        return species == pet.species && Objects.equals(nickname, pet.nickname) && Objects.equals(age, pet.age) && Objects.equals(trickLevel, pet.trickLevel) && Objects.equals(habits, pet.habits);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(species, nickname, age, trickLevel);
-        result = (31 * result) + Arrays.hashCode(habits);
-        return result;
+        return Objects.hash(species, nickname, age, trickLevel, habits);
     }
 
     @Override
@@ -97,8 +93,8 @@ public abstract class Pet {
                 species.isCanFly(),
                 species.getNumberOfLegs(),
                 species.isHasFur(),
-                Validator.isNull(Arrays.deepToString(getHabits())) ?
-                        Arrays.deepToString(getHabits()): "No Information!");
+                Validator.isNull(getHabits()) ?
+                        getHabits(): "No Information!");
     }
 
 }

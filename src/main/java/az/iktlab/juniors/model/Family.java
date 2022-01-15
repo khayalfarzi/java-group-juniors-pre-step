@@ -3,9 +3,10 @@ package az.iktlab.juniors.model;
 import az.iktlab.juniors.util.Validator;
 
 import java.time.LocalDate;
-import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.Random;
+import java.util.Set;
 
 public class Family implements HumanCreator{
 
@@ -51,8 +52,8 @@ public class Family implements HumanCreator{
             "Frank","Pedro","Gerardo","Andy","Chance","Abraham","Calvin","Trey","Donald","Derrick"};
     private Human mother;
     private Human father;
-    private Human[] children;
-    private Pet pet;
+    private List<Human> children;
+    private Set<Pet> pets;
 
     public Family(){
     }
@@ -62,11 +63,11 @@ public class Family implements HumanCreator{
         this.father = father;
     }
 
-    public Family(Human mother, Human father, Human[] children, Pet pet) {
+    public Family(Human mother, Human father, List<Human> children, Set<Pet> pets) {
         this.mother = mother;
         this.father = father;
         this.children = children;
-        this.pet = pet;
+        this.pets = pets;
     }
 
     public Human getMother() {
@@ -85,87 +86,79 @@ public class Family implements HumanCreator{
         this.father = father;
     }
 
-    public Human[] getChildren() {
+    public List<Human> getChildren() {
         return children;
     }
 
-    public void setChildren(Human[] children) {
+    public void setChildren(List<Human> children) {
         this.children = children;
     }
 
-    public Pet getPet() {
-        return pet;
+    public Set<Pet> getPets() {
+        return pets;
     }
 
-    public void setPet(Pet pet) {
-        this.pet = pet;
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
     }
 
     public void  greetPet(){
-        System.out.printf("Hello, %s%n",
-                Validator.isNull(getPet().getNickname()) ? getPet().getNickname() : "No Information!");
+        getPets().forEach(pet -> {
+            System.out.printf("Hello, %s%n",
+                    Validator.isNull(pet.getNickname()) ? pet.getNickname() : "No Information!");
+        });
+
     }
 
     public void describePet(){
-        System.out.printf("I have a %s, he is %s years old, he is %s%n",
-                Validator.isNull(getPet().getSpecies()) ? getPet().getSpecies() : "No Information!",
-                Validator.isNull(getPet().getAge()) ? getPet().getAge() : "No Information!",
-                Validator.isNull(getPet().getTrickLevel()) ? getPet().getTrickLevel() : 0 > 50 ?
-                        "very sly" : "almost not sly");
+
+        getPets().forEach(pet -> {
+            System.out.printf("I have a %s, he is %s years old, he is %s%n",
+                    Validator.isNull(pet.getSpecies()) ? pet.getSpecies() : "No Information!",
+                    Validator.isNull(pet.getAge()) ? pet.getAge() : "No Information!",
+                    Validator.isNull(pet.getTrickLevel()) ? pet.getTrickLevel() : 0 > 50 ?
+                            "very sly" : "almost not sly");
+        });
     }
 
     public boolean isFeedTime(Boolean isFeedTime){
-        System.out.printf( isFeedTime ?
-                        "Hm... I will feed Jack's %s.%n" : "I think Jack's %s is not hungry.%n",
-                Validator.isNull(getPet().getNickname()) ? getPet().getNickname() : "No Information!");
+
+        getPets().forEach(pet -> {
+            System.out.printf( isFeedTime ?
+                            "Hm... I will feed Jack's %s.%n" : "I think Jack's %s is not hungry.%n",
+                    Validator.isNull(Validator.isNull(pet) ?
+                            pet.getNickname() : null ) ? pet.getNickname() : "No Information!");
+
+        });
         return isFeedTime;
     }
 
     public boolean addChild(Human child){
-        if(child != null ) {
-            if(Validator.isExist(getChildren(),child)){
-                Human[] changedChildren = Arrays.copyOf(getChildren(),getChildren().length+1);
-                changedChildren[getChildren().length] = child;
-                setChildren(changedChildren);
-                return true;
+        if(child != null && child.getName() != null  ) {
+            if(!getChildren().contains(child)){
+                return getChildren().add(child);
             }
         }
         return false;
     }
 
     public boolean deleteChild(int index){
-        if(index < 0 || index >= getChildren().length) return false;
-        else {
-            Human[] changedChildren = new Human[getChildren().length-1];
-            int j = 0;
-            for (int i = 0; i < getChildren().length; i++) {
-                if(i != index){
-                    changedChildren[j++] = getChildren()[i];
-                }
-            }
-            setChildren(changedChildren);
+        if(index > 0 && index < getChildren().size()) {
+            getChildren().remove(index);
             return true;
         }
+        return false;
     }
 
     public boolean deleteChild(Human child){
-        if(child != null){
-            Human[] changedChildren = new Human[getChildren().length-1];
-            int j = 0;
-            for (int i = 0; i < getChildren().length; i++) {
-                if( !( child.equals(getChildren()[i]) ) ){
-                    changedChildren[j++] = getChildren()[i];
-                }
-            }
-            setChildren(changedChildren);
-            return true;
-        }
+        if(child != null)
+            return getChildren().remove(child);
         return false;
 
     }
 
     public Byte countFamily(){
-        return (byte)(getChildren().length + (getMother() != null ? 1 : 0) + (getFather() != null ? 1 : 0));
+        return (byte)(getChildren().size() + (getMother() != null ? 1 : 0) + (getFather() != null ? 1 : 0));
     }
 
     @Override
@@ -197,15 +190,12 @@ public class Family implements HumanCreator{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Family family = (Family) o;
-        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) &&
-                Arrays.equals(children, family.children) && Objects.equals(pet, family.pet);
+        return Objects.equals(mother, family.mother) && Objects.equals(father, family.father) && Objects.equals(children, family.children) && Objects.equals(pets, family.pets);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(mother, father, pet);
-        result = 31 * result + Arrays.hashCode(children);
-        return result;
+        return Objects.hash(mother, father, children, pets);
     }
 
     @Override
@@ -213,8 +203,8 @@ public class Family implements HumanCreator{
         return String.format("Family{ mother=%s%n, father=%s%n, pet = %s%n, children=%s}%n",
                 Validator.isNull(getMother()) ? getMother() : "No Information!",
                 Validator.isNull(getFather()) ? getFather() : "No Information!",
-                Validator.isNull(getPet()) ? getPet() : "No Information!",
-                Validator.isNull(Arrays.toString(getChildren())) ?
-                        Arrays.toString(getChildren()) : "No Information!" );
+                Validator.isNull(getPets()) ? getPets() : "No Information!",
+                Validator.isNull(getChildren()) ?
+                        getChildren() : "No Information!" );
     }
 }

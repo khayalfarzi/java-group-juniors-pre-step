@@ -4,6 +4,7 @@ import az.iktlab.juniors.util.Validator;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Map;
 import java.util.Objects;
 
 public class Human {
@@ -12,7 +13,7 @@ public class Human {
     private String surname;
     private LocalDate date;
     private Byte iq;
-    private String[][] schedule;
+    private Map<DayOfWeek,String> schedule;
     private Pet pet;
 
     public Human() {
@@ -29,7 +30,7 @@ public class Human {
         this.date = date;
     }
 
-    public Human(String name, String surname, LocalDate date, Byte iq,String[][] schedule){
+    public Human(String name, String surname, LocalDate date, Byte iq,Map<DayOfWeek,String> schedule){
         this.name = name;
         this.surname = surname;
         this.date = date;
@@ -77,11 +78,11 @@ public class Human {
         this.pet = pet;
     }
 
-    public String[][] getSchedule() {
+    public Map<DayOfWeek,String> getSchedule() {
         return schedule;
     }
 
-    public void setSchedule(String[][] schedule) {
+    public void setSchedule(Map<DayOfWeek,String> schedule) {
         this.schedule = schedule;
     }
 
@@ -100,26 +101,22 @@ public class Human {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Human human = (Human) o;
-        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) &&
-                Objects.equals(date, human.date) && Objects.equals(iq, human.iq) &&
-                Arrays.deepEquals(schedule, human.schedule);
+        return Objects.equals(name, human.name) && Objects.equals(surname, human.surname) && Objects.equals(date, human.date) && Objects.equals(iq, human.iq) && Objects.equals(schedule, human.schedule) && Objects.equals(pet, human.pet);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(name, surname, date, iq);
-        result = 31 * result + Arrays.deepHashCode(schedule);
-        return result;
+        return Objects.hash(name, surname, date, iq, schedule, pet);
     }
 
     @Override
     public String toString() {
-        return String.format("Human{name='%s', surname='%s', year=%s, iq=%s, schedule = %s}",
+        return String.format("Human{name=%s, surname=%s, year=%s, iq=%s, schedule = %s}",
                 Validator.isNull(getName()) ? getName() : "(No information)",
                 Validator.isNull(getSurname()) ? getSurname() : "(No information)",
                 Validator.isNull(getDate()) ? getDate() : "(No information)",
                 getIq(),
-                Validator.isNull(Arrays.deepToString(getSchedule())) ?
-                        Arrays.deepToString(getSchedule()) : "(No information)");
+                Validator.isNull(getSchedule()) ?
+                        getSchedule() : "(No information)");
     }
 }
